@@ -5,20 +5,29 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Todo.API.Connections;
 
-namespace Todo.API.Controllers
+namespace Todo.API.Controllers.V1_0
 {
+    /// <summary>
+    /// Todo API Controller
+    /// </summary>
     [ApiController]
+    [ApiVersion("1.0")] //ระบุ Version ของ API Controller ตรงนี้
     [Produces("application/json")]
-    [Route("api/[controller]/[action]")]
+    [Route("api/v{version:apiVersion}/[controller]/[action]")] //แก้ไข Route ให้รองรับกับ API Version
     public class TodoController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
+        /// <inheritdoc />
         public TodoController(ApplicationDbContext context)
         {
             _context = context;
         }
 
+        /// <summary>
+        /// Get all todo tasks
+        /// </summary>
+        /// <returns>Task List</returns>
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
@@ -26,6 +35,11 @@ namespace Todo.API.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Get todo by ID
+        /// </summary>
+        /// <param name="id">Task ID</param>
+        /// <returns>Detail of task</returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
@@ -39,6 +53,11 @@ namespace Todo.API.Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// Create new task
+        /// </summary>
+        /// <param name="request">request parameter</param>
+        /// <returns>Status</returns>
         [HttpPost]
         public async Task<IActionResult> CreateAsync(Models.Todo request)
         {
@@ -55,6 +74,12 @@ namespace Todo.API.Controllers
             return BadRequest();
         }
 
+        /// <summary>
+        /// Update exist task
+        /// </summary>
+        /// <param name="id">Task ID</param>
+        /// <param name="request">Request parameter</param>
+        /// <returns>Status</returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAsync(Guid id, Models.Todo request)
         {
@@ -79,6 +104,12 @@ namespace Todo.API.Controllers
             return BadRequest();
         }
 
+        /// <summary>
+        /// Delete task
+        /// </summary>
+        /// <param name="id">Task ID</param>
+        /// <param name="deletedBy">Name of deleter</param>
+        /// <returns>Status</returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id, string deletedBy)
         {

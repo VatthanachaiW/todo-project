@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Todo.API</name>
+    </assembly>
+    <members>
+        <member name="T:Todo.API.Controllers.V1_0.TodoController">
+            <summary>
+            Todo API Controller
+            </summary>
+        </member>
+        <member name="M:Todo.API.Controllers.V1_0.TodoController.#ctor(Todo.API.Connections.ApplicationDbContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:Todo.API.Controllers.V1_0.TodoController.GetAllAsync">
+            <summary>
+            Get all todo tasks
+            </summary>
+            <returns>Task List</returns>
+        </member>
+        <member name="M:Todo.API.Controllers.V1_0.TodoController.GetByIdAsync(System.Guid)">
+            <summary>
+            Get todo by ID
+            </summary>
+            <param name="id">Task ID</param>
+            <returns>Detail of task</returns>
+        </member>
+        <member name="M:Todo.API.Controllers.V1_0.TodoController.CreateAsync(Todo.API.Models.Todo)">
+            <summary>
+            Create new task
+            </summary>
+            <param name="request">request parameter</param>
+            <returns>Status</returns>
+        </member>
+        <member name="M:Todo.API.Controllers.V1_0.TodoController.UpdateAsync(System.Guid,Todo.API.Models.Todo)">
+            <summary>
+            Update exist task
+            </summary>
+            <param name="id">Task ID</param>
+            <param name="request">Request parameter</param>
+            <returns>Status</returns>
+        </member>
+        <member name="M:Todo.API.Controllers.V1_0.TodoController.DeleteAsync(System.Guid,System.String)">
+            <summary>
+            Delete task
+            </summary>
+            <param name="id">Task ID</param>
+            <param name="deletedBy">Name of deleter</param>
+            <returns>Status</returns>
+        </member>
+    </members>
+</doc>

@@ -1,18 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Reflection;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Todo.API.Connections;
+using Todo.Extensions.Swaggers;
 
 namespace Todo.API
 {
@@ -41,6 +37,15 @@ namespace Todo.API
                     });
             });
 
+            // สำหรับเรียกใช้ Options ต่างๆ 
+            services.AddOptions();
+            // สำหรับเรียกใช้ IHttpContextAccessor
+            services.AddHttpContextAccessor();
+            // สำหรับให้ API เรารองรับหลาย Version
+            services.AddApiVersioning();
+            // สำหรับสร้าง Swagger Document
+            services.AddSwaggerDocuments("Todo.API");
+
             services.AddControllers();
         }
 
@@ -55,6 +60,9 @@ namespace Todo.API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            // เปิดใช้งาน Swagger
+            app.UseSwaggerDocuments();
 
             app.UseEndpoints(endpoints =>
             {
