@@ -48,5 +48,16 @@
             <param name="deletedBy">Name of deleter</param>
             <returns>Status</returns>
         </member>
+        <member name="T:Todo.API.Controllers.V2_0.TodoController">
+            <summary>
+            Todo API Controller
+            </summary>
+        </member>
+        <member name="M:Todo.API.Controllers.V2_0.TodoController.GetAllAsync">
+            <summary>
+            Method นี้ยังไม่ได้เขียนโค๊ดเลยนะ 
+            </summary>
+            <returns>NotImplementedException</returns>
+        </member>
     </members>
 </doc>
