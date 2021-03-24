@@ -3,12 +3,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Todo.API.Connections;
+using Todo.Models.Contexts;
+using Todo.Models.Models;
 
 namespace Todo.API.Controllers.V1_0
 {
     /// <summary>
-    /// Todo API Controller
+    /// TodoTask API Controller
     /// </summary>
     [ApiController]
     [ApiVersion("1.0")] //ระบุ Version ของ API Controller ตรงนี้
@@ -31,7 +32,7 @@ namespace Todo.API.Controllers.V1_0
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
-            var result = await _context.Set<Models.Todo>().Where(s => !s.IsDelete).ToListAsync();
+            var result = await _context.Set<TodoTask>().Where(s => !s.IsDelete).ToListAsync();
             return Ok(result);
         }
 
@@ -43,7 +44,7 @@ namespace Todo.API.Controllers.V1_0
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(Guid id)
         {
-            var result = await _context.Set<Models.Todo>().FirstOrDefaultAsync(s => s.Id == id);
+            var result = await _context.Set<TodoTask>().FirstOrDefaultAsync(s => s.Id == id);
 
             if (result != null)
             {
@@ -59,13 +60,13 @@ namespace Todo.API.Controllers.V1_0
         /// <param name="request">request parameter</param>
         /// <returns>Status</returns>
         [HttpPost]
-        public async Task<IActionResult> CreateAsync(Models.Todo request)
+        public async Task<IActionResult> CreateAsync(Models.Models.TodoTask request)
         {
             request.CreatedOn = DateTime.UtcNow;
             request.UpdatedBy = request.CreatedBy;
             request.UpdatedOn = DateTime.UtcNow;
 
-            await _context.Set<Models.Todo>().AddAsync(request);
+            await _context.Set<TodoTask>().AddAsync(request);
             if (await _context.SaveChangesAsync() > 0)
             {
                 return Ok();
@@ -81,9 +82,9 @@ namespace Todo.API.Controllers.V1_0
         /// <param name="request">Request parameter</param>
         /// <returns>Status</returns>
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, Models.Todo request)
+        public async Task<IActionResult> UpdateAsync(Guid id, TodoTask request)
         {
-            var exist = await _context.Set<Models.Todo>().FirstOrDefaultAsync(s => s.Id == id);
+            var exist = await _context.Set<TodoTask>().FirstOrDefaultAsync(s => s.Id == id);
             if (exist == null) return NotFound();
 
             exist.StartDate = request.StartDate;
@@ -94,7 +95,7 @@ namespace Todo.API.Controllers.V1_0
             exist.UpdatedOn = DateTime.UtcNow;
             exist.IsActive = request.IsActive;
 
-            _context.Set<Models.Todo>().Update(exist);
+            _context.Set<TodoTask>().Update(exist);
 
             if (await _context.SaveChangesAsync() > 0)
             {
@@ -113,14 +114,14 @@ namespace Todo.API.Controllers.V1_0
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id, string deletedBy)
         {
-            var exist = await _context.Set<Models.Todo>().FirstOrDefaultAsync(s => s.Id == id);
+            var exist = await _context.Set<TodoTask>().FirstOrDefaultAsync(s => s.Id == id);
             if (exist == null) return NotFound();
 
             exist.IsDelete = true;
             exist.DeletedBy = deletedBy;
             exist.DeletedOn = DateTime.UtcNow;
 
-            _context.Set<Models.Todo>().Update(exist);
+            _context.Set<TodoTask>().Update(exist);
 
             if (await _context.SaveChangesAsync() > 0)
             {

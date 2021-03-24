@@ -1,4 +1,4 @@
-﻿namespace Todo.API.Enums
+﻿namespace Todo.Models.Enums
 {
     public enum Status : byte
     {

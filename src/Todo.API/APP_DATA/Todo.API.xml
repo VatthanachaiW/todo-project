@@ -6,10 +6,10 @@
     <members>
         <member name="T:Todo.API.Controllers.V1_0.TodoController">
             <summary>
-            Todo API Controller
+            TodoTask API Controller
             </summary>
         </member>
-        <member name="M:Todo.API.Controllers.V1_0.TodoController.#ctor(Todo.API.Connections.ApplicationDbContext)">
+        <member name="M:Todo.API.Controllers.V1_0.TodoController.#ctor(Todo.Models.Contexts.ApplicationDbContext)">
             <inheritdoc />
         </member>
         <member name="M:Todo.API.Controllers.V1_0.TodoController.GetAllAsync">
@@ -25,14 +25,14 @@
             <param name="id">Task ID</param>
             <returns>Detail of task</returns>
         </member>
-        <member name="M:Todo.API.Controllers.V1_0.TodoController.CreateAsync(Todo.API.Models.Todo)">
+        <member name="M:Todo.API.Controllers.V1_0.TodoController.CreateAsync(Todo.Models.Models.TodoTask)">
             <summary>
             Create new task
             </summary>
             <param name="request">request parameter</param>
             <returns>Status</returns>
         </member>
-        <member name="M:Todo.API.Controllers.V1_0.TodoController.UpdateAsync(System.Guid,Todo.API.Models.Todo)">
+        <member name="M:Todo.API.Controllers.V1_0.TodoController.UpdateAsync(System.Guid,Todo.Models.Models.TodoTask)">
             <summary>
             Update exist task
             </summary>
@@ -47,17 +47,6 @@
             <param name="id">Task ID</param>
             <param name="deletedBy">Name of deleter</param>
             <returns>Status</returns>
-        </member>
-        <member name="T:Todo.API.Controllers.V2_0.TodoController">
-            <summary>
-            Todo API Controller
-            </summary>
-        </member>
-        <member name="M:Todo.API.Controllers.V2_0.TodoController.GetAllAsync">
-            <summary>
-            Method นี้ยังไม่ได้เขียนโค๊ดเลยนะ 
-            </summary>
-            <returns>NotImplementedException</returns>
         </member>
     </members>
 </doc>

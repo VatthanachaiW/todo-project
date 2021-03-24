@@ -1,10 +1,10 @@
 ﻿using System;
-using Todo.API.Enums;
+using Todo.Models.Enums;
 
-namespace Todo.API.Models
+namespace Todo.Models.Models
 {
     [Serializable]
-    public class Todo
+    public class TodoTask
     {
         public Guid Id { get; set; }
         public DateTime StartDate { get; set; }
